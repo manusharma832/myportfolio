@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sudhir — Senior Full-Stack .NET Developer</title>
+<meta name="description" content="Sudhir — Senior Full-Stack .NET Developer. ASP.NET Core, C#, SQL Server, Azure, Angular. Available for freelance and contract work.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#0A0F1A;
+    --surface:#111A2B;
+    --line:#1F2B40;
+    --text:#E8EDF6;
+    --text-muted:#9AA6BD;
+    --green:#4ADE9A;
+    --amber:#FFB454;
+    --radius:12px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    background-image:
+      repeating-linear-gradient(to right, rgba(255,255,255,0.025) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(to bottom, rgba(255,255,255,0.025) 0 1px, transparent 1px 48px);
+  }
+
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; color:var(--text); line-height:1.1;}
+
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  a{color:inherit; text-decoration:none;}
+
+  img{max-width:100%; display:block;}
+
+  a:focus-visible, button:focus-visible, label:focus-visible{
+    outline:2px solid var(--green);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--green);
+    margin-bottom:14px;
+    display:block;
+  }
+
+  /* ---------- Topbar ---------- */
+  header.topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(10,15,26,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+
+  .topbar-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+
+  .status-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.78rem;
+    color:var(--green);
+    letter-spacing:0.02em;
+    white-space:nowrap;
+  }
+
+  .status-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--green);
+    animation:pulse 2s infinite;
+    flex-shrink:0;
+  }
+
+  .status-dot.amber{ background:var(--amber); }
+
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(74,222,154,0.55);}
+    70%{box-shadow:0 0 0 6px rgba(74,222,154,0);}
+    100%{box-shadow:0 0 0 0 rgba(74,222,154,0);}
+  }
+
+  .nav-wrap{ position:relative; display:flex; align-items:center; gap:20px; }
+
+  .nav-toggle-input{ display:none; }
+
+  .nav-toggle-btn{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    padding:6px;
+  }
+  .nav-toggle-btn span{
+    width:22px; height:2px; background:var(--text); display:block;
+  }
+
+  .nav-links{
+    display:flex;
+    gap:24px;
+    list-style:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+
+  .nav-links a{ color:var(--text-muted); transition:color .2s; }
+  .nav-links a:hover{ color:var(--text); }
+
+  .available-pill{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.04em;
+    color:var(--amber);
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:90px 0 70px;
+    min-height:80vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 4.6rem);
+    font-weight:700;
+  }
+
+  .hero .tagline{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:500;
+    font-size:clamp(1.1rem, 2vw, 1.45rem);
+    color:var(--text-muted);
+    margin-top:10px;
+    max-width:34ch;
+  }
+
+  .hero .bio{
+    margin-top:22px;
+    max-width:58ch;
+    color:var(--text-muted);
+    font-size:1.02rem;
+  }
+
+  .cta-row{
+    display:flex;
+    gap:16px;
+    margin-top:32px;
+    flex-wrap:wrap;
+  }
+
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    letter-spacing:0.02em;
+    padding:13px 22px;
+    border-radius:8px;
+    transition:transform .15s, border-color .15s, opacity .15s;
+    display:inline-block;
+  }
+
+  .btn-primary{
+    background:var(--green);
+    color:var(--ink);
+    font-weight:600;
+    border:1px solid var(--green);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); }
+
+  .btn-secondary{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--text);
+  }
+  .btn-secondary:hover{ border-color:var(--text-muted); transform:translateY(-2px); }
+
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    margin-top:56px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+
+  .stat{
+    background:var(--surface);
+    padding:22px 20px;
+  }
+
+  .stat .num{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:2rem;
+    color:var(--green);
+  }
+
+  .stat .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    margin-top:6px;
+  }
+
+  /* ---------- Section base ---------- */
+  section{ padding:90px 0; border-top:1px solid var(--line); }
+  section#hero, .hero{ border-top:none; }
+
+  section h2{
+    font-size:clamp(1.7rem, 3.2vw, 2.3rem);
+    margin-bottom:18px;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:48px;
+  }
+
+  .about-grid p{ color:var(--text-muted); max-width:62ch; }
+
+  /* ---------- Stack ---------- */
+  .stack-sub{ color:var(--text-muted); max-width:55ch; margin-bottom:40px; }
+
+  .stack-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:32px;
+  }
+
+  .stack-cat h3{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text);
+    padding-bottom:10px;
+    border-bottom:2px solid var(--green);
+    margin-bottom:14px;
+    font-weight:500;
+  }
+
+  .tag-list{ display:flex; flex-wrap:wrap; gap:8px; }
+
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--text-muted);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:5px 10px;
+    transition:border-color .2s, color .2s;
+  }
+  .tag:hover{ border-color:var(--green); color:var(--text); }
+
+  /* ---------- Work ---------- */
+  .work-sub{ color:var(--text-muted); max-width:58ch; margin-bottom:40px; }
+
+  .service-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:30px 32px;
+    margin-bottom:20px;
+    transition:border-color .2s, transform .2s;
+  }
+  .service-card:hover{ border-color:#33425c; transform:translateY(-2px); }
+
+  .card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+
+  .card-status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.78rem;
+  }
+  .card-status.live{ color:var(--green); }
+  .card-status.build{ color:var(--amber); }
+
+  .card-meta{
+    font-size:0.75rem;
+    color:var(--text-muted);
+    letter-spacing:0.02em;
+  }
+
+  .card-title{
+    font-size:1.4rem;
+    font-weight:600;
+    margin-bottom:10px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  a.card-title:hover{ color:var(--green); }
+
+  .card-desc{ color:var(--text-muted); max-width:68ch; margin-bottom:16px; }
+
+  .card-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .card-tags .tag{ font-size:0.72rem; padding:4px 9px; }
+
+  .service-card.placeholder{
+    background:transparent;
+    border:1px dashed var(--line);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    min-height:130px;
+    color:var(--text-muted);
+  }
+  .service-card.placeholder strong{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--text);
+    margin-bottom:6px;
+    font-size:0.85rem;
+  }
+  .service-card.placeholder span{ font-size:0.85rem; }
+
+  /* ---------- Contact ---------- */
+  .contact-sub{ color:var(--text-muted); max-width:58ch; margin-bottom:32px; }
+
+  .contact-links{ display:flex; flex-wrap:wrap; gap:14px; }
+
+  .contact-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 20px;
+    transition:border-color .2s, transform .2s;
+  }
+  .contact-links a:hover{ border-color:var(--green); transform:translateY(-2px); }
+  .contact-links a.primary{
+    background:var(--green);
+    color:var(--ink);
+    border-color:var(--green);
+    font-weight:600;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:28px 0 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--text-muted);
+  }
+  footer a:hover{ color:var(--text); }
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    .stack-grid{ grid-template-columns:repeat(2, 1fr); }
+    .about-grid{ grid-template-columns:1fr; gap:20px; }
+  }
+
+  @media (max-width:768px){
+    .nav-toggle-btn{ display:flex; }
+    .nav-links{
+      display:none;
+      position:absolute;
+      top:calc(100% + 16px);
+      right:0;
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:8px;
+      flex-direction:column;
+      gap:14px;
+      padding:18px 22px;
+      min-width:160px;
+    }
+    .nav-toggle-input:checked ~ .nav-links{ display:flex; }
+    .available-pill{ display:none; }
+    .stat-row{ grid-template-columns:1fr; }
+    section{ padding:64px 0; }
+    .stack-grid{ grid-template-columns:1fr 1fr; gap:24px; }
+  }
+
+  @media (max-width:480px){
+    .stack-grid{ grid-template-columns:1fr; }
+    .service-card{ padding:24px 20px; }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="topbar" id="top">
+  <div class="topbar-inner">
+    <span class="status-pill mono"><span class="status-dot"></span>All systems operational</span>
+
+    <div class="nav-wrap">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+      <label for="nav-toggle" class="nav-toggle-btn" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </label>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <span class="available-pill">● Available for freelance work</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" id="hero">
+    <span class="eyebrow">Senior Full-Stack .NET Developer</span>
+    <h1>Sudhir</h1>
+    <p class="tagline">I build backend systems that stay up.</p>
+    <p class="bio">
+      8+ years building and maintaining production systems with ASP.NET Core, C#, SQL Server, and Azure.
+      I specialize in SaaS architecture, payment gateway integration, and high-volume transaction systems.
+      Currently taking on freelance and contract work for SaaS, logistics, and fintech teams.
+    </p>
+    <div class="cta-row">
+      <a href="#work" class="btn btn-primary">View my work</a>
+      <a href="#contact" class="btn btn-secondary">Get in touch</a>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="num">8+</div>
+        <div class="label">Years in production</div>
+      </div>
+      <div class="stat">
+        <div class="num">7+</div>
+        <div class="label">Years zero downtime</div>
+      </div>
+      <div class="stat">
+        <div class="num">3</div>
+        <div class="label">Live systems</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about-grid">
+      <div>
+        <span class="eyebrow">About</span>
+        <h2>I keep systems running, not just shipped.</h2>
+      </div>
+      <p>
+        I'm a Senior Full-Stack .NET Developer working with ASP.NET Core, C#, SQL Server, Entity Framework,
+        Azure, and Angular. Most of my career has been spent on systems that can't afford downtime —
+        logistics platforms, multi-tenant SaaS, and payment-heavy transaction flows. Right now I'm also
+        building <strong>ApnaVyapar</strong>, a marketplace connecting buyers and sellers directly in
+        India's smaller towns and villages, as founder and developer. I'm open to international freelance
+        and contract work.
+      </p>
+    </div>
+  </section>
+
+  <section id="stack">
+    <span class="eyebrow">Stack</span>
+    <h2>What I build with.</h2>
+    <p class="stack-sub">The tools I actually ship production code with — not a list of everything I've ever touched.</p>
+
+    <div class="stack-grid">
+      <div class="stack-cat">
+        <h3>Backend</h3>
+        <div class="tag-list">
+          <span class="tag">ASP.NET Core</span>
+          <span class="tag">C#</span>
+          <span class="tag">.NET 10</span>
+          <span class="tag">REST APIs</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <h3>Data &amp; Cloud</h3>
+        <div class="tag-list">
+          <span class="tag">SQL Server</span>
+          <span class="tag">Entity Framework Core</span>
+          <span class="tag">Azure</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <h3>Frontend</h3>
+        <div class="tag-list">
+          <span class="tag">Angular</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <h3>Specializations</h3>
+        <div class="tag-list">
+          <span class="tag">SaaS architecture</span>
+          <span class="tag">Payment gateways</span>
+          <span class="tag">High-volume transactions</span>
+          <span class="tag">JWT auth</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <span class="eyebrow">Work</span>
+    <h2>Selected work.</h2>
+    <p class="work-sub">A running log of what I've built and kept live. I add to this as I ship more.</p>
+
+    <!-- PROJECT CARD — copy this whole <article> block to add a new project -->
+    <article class="service-card">
+      <div class="card-head">
+        <span class="card-status live"><span class="status-dot"></span>Operational</span>
+        <span class="card-meta mono">2017 — Present · Maintainer &amp; Lead Developer</span>
+      </div>
+      <a href="https://dennisshipping.com" target="_blank" rel="noopener" class="card-title">Dennis Shipping ↗</a>
+      <p class="card-desc">
+        Cargo logistics platform for Caribbean and US freight. I've maintained this system for 7+ years
+        with a zero-downtime record — handling bug fixes, optimizations, and new features without ever
+        taking the platform offline.
+      </p>
+      <div class="card-tags">
+        <span class="tag">ASP.NET MVC</span>
+        <span class="tag">SQL Server</span>
+        <span class="tag">C#</span>
+      </div>
+    </article>
+
+    <article class="service-card">
+      <div class="card-head">
+        <span class="card-status live"><span class="status-dot"></span>Operational</span>
+        <span class="card-meta mono">Multi-tenant SaaS · Lead Developer</span>
+      </div>
+      <span class="card-title">AceBiz.ca</span>
+      <p class="card-desc">
+        A multi-tenant SaaS platform helping Indigenous entrepreneurs in Canada build business plans.
+        Built on ASP.NET Core MVC with SQL Server, designed to serve multiple organizations from one codebase.
+      </p>
+      <div class="card-tags">
+        <span class="tag">ASP.NET Core MVC</span>
+        <span class="tag">SQL Server</span>
+        <span class="tag">Multi-tenant</span>
+      </div>
+    </article>
+
+    <article class="service-card">
+      <div class="card-head">
+        <span class="card-status build"><span class="status-dot amber"></span>Operational</span>
+        <span class="card-meta mono">2026 — Present · Founder &amp; Developer</span>
+      </div>
+      <span class="card-title">Built a fuzzy logic material assessment app in Xamarin (iOS & Android)</span>
+      <p class="card-desc">
+        A cross-platform mobile app for sustainable construction material selection using fuzzy logic and multi-criteria decision 
+		analysis (MCDA). Users rate materials across environmental impact, cost, and lifecycle criteria. The app computes membership 
+		functions, defuzzification scores, and ranks materials automatically.
+		Built with Xamarin C# for iOS and Android. Academic/research tool used for comparing 2–5 construction materials side by side.
+      </p>
+      <div class="card-tags">
+        <span class="tag">.NET 6</span>
+        <span class="tag">EF Core</span>
+        <span class="tag">SQL Server</span>
+        <span class="tag">Xamarin</span>
+      </div>
+    </article>
+
+    <!-- Placeholder — delete this once you add a real project, or keep it as a "coming soon" slot -->
+    <div class="service-card placeholder">
+      <strong>+ More work lands here</strong>
+      <span>I add new projects as I ship them.</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <span class="eyebrow">Contact</span>
+    <h2>Let's build something reliable.</h2>
+    <p class="contact-sub">
+      Open to freelance and contract work — SaaS, logistics, and fintech teams welcome.
+      Based in India, working across US, UK, Canada, and Australia time zones.
+    </p>
+    <div class="contact-links">
+      <!-- Replace these placeholder links with your real email and profile URLs -->
+      <a href="mailto:MANUSHARMA832@Gmail.com" class="primary">Email me ↗</a>
+      <a href="https://www.linkedin.com/in/sudhir-kumar-980ab9136/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://upwork.com/freelancers/sudhirsharma72" target="_blank" rel="noopener">Upwork ↗</a>
+      <a href="https://arc.dev/@manusharma649308?preview=1" target="_blank" rel="noopener">Arc.dev ↗</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Sudhir. Built with HTML &amp; CSS.</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+
+</body>
+</html>
